@@ -1,11 +1,9 @@
-<!DOCTYPE html>
-<html>
-  <head>
-    <title><%= title %></title>
-    <link rel='stylesheet' href='/stylesheets/style.css' />
-  </head>
-  <body>
-    <h1><%= title %></h1>
-    <p>Welcome to <%= title %></p>
-  </body>
-</html>
+<% layout('layout') -%>
+<div class="hero-unit">
+  <h1>Welcome to SimpleTwitter</h1>
+  <p>SimpleTwitter is a microBlog system</p>
+  <p>
+    <a class="btn btn-primary btn-large" href="/login">Log-in</a>
+    <a class="btn btn-large" href="/reg">Register</a>
+  </p>
+</div>
