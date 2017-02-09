@@ -5,7 +5,11 @@ var favicon = require('serve-favicon');
 var logger = require('morgan');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
+var settings = require('./settings');
+var session = require('express-session');
+var MongoStore = require('connect-mongo')(session);
 
+//require routes
 var index = require('./routes/index');
 var user = require('./routes/user');
 var post = require('./routes/post');
@@ -14,10 +18,11 @@ var login = require('./routes/login');
 var logout = require('./routes/logout');
 
 
+
 var app = express();
 
 //setup ejs-mate for ejs layout
-var engine = require('ejs-mate')
+var engine = require('ejs-mate');
 app.engine('ejs',engine);
 
 // view engine setup 
@@ -35,6 +40,12 @@ app.use(bodyParser.urlencoded({
 }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
+app.use(session({
+  secret : settings.cookieSecret,
+  store : new MongoStore(
+    {url: "mongodb://" + settings.host + "/" + settings.db}
+  )
+}));
 
 app.get('/', index);
 app.get('/hello', index);
@@ -64,6 +75,7 @@ app.use(function (err, req, res, next) {
   res.status(err.status || 500);
   res.render('error');
 });
+
 
 
 module.exports = app;
