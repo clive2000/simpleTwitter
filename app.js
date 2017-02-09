@@ -16,7 +16,7 @@ var post = require('./routes/post');
 var reg = require('./routes/reg');
 var login = require('./routes/login');
 var logout = require('./routes/logout');
-
+var flash = require('express-flash');
 
 
 var app = express();
@@ -47,6 +47,21 @@ app.use(session({
   )
 }));
 
+
+//message middleware
+// app.use(require('connect-flash')());
+// app.use(function (req, res, next) {
+//   res.locals.messages = require('express-messages')(req, res);
+//   next();
+// });
+app.use(flash());
+app.use(function(req, res, next){
+    // if there's a flash message in the session request, make it available in the response, then delete it
+    res.locals.sessionFlash = req.session.sessionFlash;
+    delete req.session.sessionFlash;
+    next();
+});
+
 app.get('/', index);
 app.get('/hello', index);
 app.get('/u/:user', user); //get /u/[user]
@@ -75,6 +90,7 @@ app.use(function (err, req, res, next) {
   res.status(err.status || 500);
   res.render('error');
 });
+
 
 
 
