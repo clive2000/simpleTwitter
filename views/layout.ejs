@@ -1,9 +1,6 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
   "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html>
-<script src="/javascripts/jquery.js"></script>
-<script src="/javascripts/bootstrap.js"></script>
-
 <head>
     <title>
         <%= title %> - Microblog</title>
@@ -30,8 +27,12 @@
                 <div class="nav-collapse">
                     <ul class="nav">
                         <li class="active"><a href="/">Front</a></li>
-                        <li><a href="/login">Log-in</a></li>
-                        <li><a href="/reg">Register</a></li>
+                        <% if (!user) { %>
+                            <li><a href="/login">Login</a></li>
+                            <li><a href="/reg">Register</a></li>
+                        <% } else { %>
+                            <li><a href="/logout">Logout</a></li>
+                        <% } %>
                     </ul>
                 </div>
             </div>
@@ -47,5 +48,8 @@
             </footer>
     </div>
 </body>
+
+<script src="/javascripts/jquery.js"></script>
+<script src="/javascripts/bootstrap.js"></script>
 
 </html>

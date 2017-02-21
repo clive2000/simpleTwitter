@@ -4,6 +4,7 @@ var crypto = require('crypto');
 var User = require('../models/user.js');
 
 /* GET users listing. */
+router.get('/reg',checkNotLogin)
 router.get('/reg', function(req, res, next) {
   res.render('reg',{
       title: 'User Registration',
@@ -12,6 +13,7 @@ router.get('/reg', function(req, res, next) {
   });
 });
 
+router.post('/reg',checkNotLogin)
 router.post('/reg', function(req, res, next) {
 
   //if password do not match, add flash msg and repead 
@@ -29,7 +31,7 @@ router.post('/reg', function(req, res, next) {
     password : password
   });
 
-  newUser.get(newUser.name, function(err,user){
+  newUser.getUser(newUser.name, function(err,user){
     if(user){
       err = 'Username Already exits';
       req.flash('error',err);
@@ -48,5 +50,14 @@ router.post('/reg', function(req, res, next) {
 
   });
 });
+
+
+function checkNotLogin(req, res, next) {
+    if (req.session.user) {
+      req.flash('error', 'Already Logged in');
+      return res.redirect('/');
+    }
+    next();
+}
 
 module.exports = router;

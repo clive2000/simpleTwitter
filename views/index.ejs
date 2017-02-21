@@ -1,4 +1,16 @@
 <% layout('layout') -%>
+    <% if( errorMsgFlash.length != 0 ){ %>
+                <div class="alert alert-error alert-dismissible" role="alert">
+                    <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                        <p> <%= errorMsgFlash %></p>
+                </div>
+     <% } %>
+    <% if( successMsgFlash.length != 0 ){ %>
+                <div class="alert alert-successerror alert-dismissible" role="alert">
+                    <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                        <p> <%= successMsgFlash %></p>
+                </div>
+     <% } %>
   <div class="hero-unit">
     <h1>Welcome to SimpleTwitter</h1>
     <p>SimpleTwitter is a microBlog system</p>
@@ -11,7 +23,6 @@
   <div class="row">
     <div class="span4">
       <h1> Row A </h1>
-      <a class="bth btn-primary btn-small" href="/login">Log-in</a>
     </div>
     <div class="span4">
       <h1> Row B </h1>

@@ -55,6 +55,13 @@ app.use(flash());
 //     next();
 // });
 
+//refer to http://www.cnblogs.com/yumianhu/p/3713380.html
+app.use(function(req,res,next){
+  res.locals.user=req.session.user;   
+  next();
+});
+
+
 app.get('/', index);
 app.get('/hello', index);
 app.get('/u/:user', user); //get /u/[user]
@@ -63,7 +70,9 @@ app.get('/reg',reg);
 app.post('/reg',reg);
 app.get('/login',login);
 app.post('/login',login);
-app.get('logout',logout);
+app.get('/logout',logout);
+
+
 
 
 // catch 404 and forward to error handler

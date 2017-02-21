@@ -5,6 +5,7 @@ function User(user){
     this.password = user.password;
 }
 
+module.exports = User;
 
 User.prototype.save = function save(cb){
     var user = {
@@ -32,7 +33,7 @@ User.prototype.save = function save(cb){
     });
 };
 
-User.prototype.get = function get(username,cb){
+User.prototype.getUser = function getUser(username,cb){
     mongodb.open(function(err,db){
         if (err){
             return callback(err);
@@ -56,5 +57,3 @@ User.prototype.get = function get(username,cb){
     });
 };
 
-
-module.exports = User;
