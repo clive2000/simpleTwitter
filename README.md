@@ -1,5 +1,12 @@
 # simpleTwitter
 simple sns website using express+bootstrap+nosql
 
-**This is just an assignment for nodejs. No practical use at all.**
+Still WIP as bootstarp needs a update.
+Alreadly implemented:
+1. User Registeration
+2. User session storage
+3. Basic web framework
+4. Database model
 
+## How to start
+clone the package then `npm start`
